@@ -15,3 +15,14 @@ The first time you load up vscode it takes a bit, because it is installing the v
 3. run 'nix-shell' to set up your environment (the shell should load a local .envrc as well)
 
 - the first time you spin up the environment you will not have any way to clone code, load the workspaces nix file, then manually add your key to the agent.
+
+## Running the Container
+
+Run the container, then use the "attach to running container" feature in vscode.
+'docker run -d \
+  --mount type=volume,source=vscode,target=/root/.vscode \
+  --mount type=volume,source=vscode-server,target=/root/.vscode-server \
+  --mount type=volume,source=vscode-remote-containers,target=/root/.vscode-remote-containers \
+  --mount type=volume,source=workspaces,target=/workspaces \
+  --mount type=bind,source=/root/.ssh,target=/root/.ssh \
+  matttrach/nix-container:1.1.0 top'
